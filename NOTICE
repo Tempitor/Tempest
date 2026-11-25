@@ -1,0 +1,28 @@
+Tempest - firmware modifications for handheld radios
+Copyright (C) 2026 Tempitor (https://github.com/Tempitor)
+
+This program is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option)
+any later version. See the LICENSE file for the full text.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+------------------------------------------------------------------------------
+Alternative (commercial) licensing
+
+The copyright holder offers this software under other license terms as well,
+for example to radio manufacturers who want to include it in their own
+products without the obligations of the GPL. To ask about this, open an issue
+at https://github.com/Tempitor/Tempest or contact the author through GitHub.
+
+------------------------------------------------------------------------------
+Third-party material
+
+This repository contains no manufacturer firmware. Users supply the stock
+firmware file themselves, downloaded from the manufacturer. Retevis, Ailunce
+and HA1G are names of their respective owners and are used here only to say
+which radio the mods are for. Tempest is not affiliated with or endorsed by
+any radio manufacturer.
