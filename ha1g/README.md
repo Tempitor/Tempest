@@ -16,14 +16,16 @@ Your channels and settings are kept, and CHIRP and the Retevis CPS still recogni
 - A Windows, Mac, Linux or ChromeOS computer with **Chrome or Edge** (or Chromium). Firefox,
   Safari and phones do not work, because they have no Web Serial.
 - The normal HA1G programming cable.
-- The stock firmware **`HA1G_V1.01.14.002_20260422.bin`** (version V1.01.14.002) from the
-  Retevis / Ailunce HA1G download page. Unzip it first. Any other file or version is refused.
+- The stock firmware **`HA1G_V1.01.14.002_20260422.bin`** (version **V1.01.14.002**). Download it from
+  the Ailunce HA1G software page: https://www.ailunce.com/supports-ha1g-software
+  Make sure you download exactly this version (V1.01.14.002); newer or older versions do not work
+  and are refused. Unzip it first.
 
 ## How to flash
 
 1. Back up your codeplug with CHIRP or the Retevis CPS.
 2. Open the flasher link above.
-3. Choose the stock `.bin`. You should see two green ticks:
+3. Choose the stock `.bin` (V1.01.14.002 from the [Ailunce HA1G software page](https://www.ailunce.com/supports-ha1g-software)). You should see two green ticks:
    stock file confirmed, and patched file matches D020.
 4. Click **Select COM port** and choose the cable.
 5. Turn the radio off. Hold **PTT + SK1** while turning it on (update mode).
