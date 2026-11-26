@@ -31,7 +31,14 @@ Your channels and settings are kept, and CHIRP and the Retevis CPS still recogni
 7. Check Menu → Radio Information.
 
 If something fails, click **Save log**. The radio stays in update mode, so you can just flash again.
-To go back to stock, flash the stock `.bin` with the Retevis / Ailunce firmware update tool.
+
+## Return to stock
+
+1. Open the flasher and choose the same stock `.bin` as above.
+2. Under **Flash**, pick **Stock V1.01.14.002 (your file as is, return to stock)**.
+3. Select the COM port, put the radio in update mode (**PTT + SK1** at power on), and click **Flash stock V1.01.14.002**.
+
+The flasher only re-flashes the verified stock file you chose, exactly as it is. The Retevis / Ailunce firmware update tool works too.
 
 After flashing, the red LED may stay on until you transmit, receive or power cycle. That is the
 bootloader, not a fault.
