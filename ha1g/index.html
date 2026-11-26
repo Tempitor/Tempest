@@ -404,6 +404,17 @@ $("pick").addEventListener("click", async () => {
   refresh();
 });
 
+// Flash counter: one anonymous download of a tiny GitHub release file per successful flash.
+// Counts show as download_count on the release assets. The dev page never counts.
+const COUNT_URL = "https://github.com/Tempitor/Tempest/releases/download/ha1g-v1.0.0/";
+let countOn = true;
+function countFlash(kind) {
+  if (!countOn) return;
+  try {
+    fetch(COUNT_URL + "count-" + kind + ".txt", { mode: "no-cors", cache: "no-store", credentials: "omit", referrerPolicy: "no-referrer" }).catch(() => {});
+  } catch (e) { /* counting must never affect flashing */ }
+}
+
 $("flash").addEventListener("click", async () => {
   const { fw, name: fwName, stock: toStock } = cur();
   const q = toStock ? "Flash the stock Retevis firmware V1.01.14.002 (" + fwName + ") to the radio?\nThis removes the mod and returns the radio to stock."
@@ -418,6 +429,7 @@ $("flash").addEventListener("click", async () => {
     });
     say("done. Check Radio Info on the radio for the new version string.", "o");
     $("status").textContent = "done"; $("status").className = "o";
+    countFlash(toStock ? "stock" : "tempest");
   } catch (e) {
     say("FAILED: " + e.message, "e"); $("status").textContent = "failed"; $("status").className = "e";
   }
