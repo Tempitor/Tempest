@@ -57,6 +57,9 @@
       <div class="row"><label class="k">Mod</label><span id="modinfo"></span></div>
       <div class="row" style="margin-top:6px"><label class="k">Stock file</label><input type="file" id="stock" accept=".bin"></div>
       <div id="stockinfo" class="info muted">Choose the stock Retevis/Ailunce HA1G V1.01.14.002 file (HA1G_V1.01.14.002_20260422.bin). Any other file or version is refused.</div>
+      <div id="whatrow" class="row" style="margin-top:10px;align-items:flex-start" hidden><label class="k">Flash</label>
+        <div><label><input type="radio" name="what" id="whatmod" checked> <b id="whatmodname">Tempest</b> <span class="muted">(stock + mod patch)</span></label><br>
+          <label><input type="radio" name="what" id="whatstock"> <b>Stock V1.01.14.002</b> <span class="muted">(your file as is, return to stock)</span></label></div></div>
     </div>
   </div>
 
@@ -329,18 +332,24 @@ async function flash(port, fw, name, onProgress) {
 // Developer-only code is marked and removed by tool/ha1g_patch.py public.
 const PATCH = loadPatch();
 let mode = "patch", port = null, busy = false;
-let pat = { fw: null, name: "" };                   // stock + embedded patch
-let cur = () => ({ fw: pat.fw, name: pat.name, bad: false });
+let pat = { fw: null, name: "", stock: null };      // stock + embedded patch; stock = the verified stock file
+const STOCK_NAME = "HA1G_V1.01.14.002_20260422.bin";
+const wantStock = () => !!pat.stock && $("whatstock").checked;   // "return to stock": flash the user's verified stock file as is
+const patCur = () => wantStock() ? { fw: pat.stock, name: STOCK_NAME, bad: false, stock: true } : { fw: pat.fw, name: pat.name, bad: false };
+let cur = patCur;
 function refresh() {
   const c = cur();
   $("flash").disabled = busy || !c.fw || !port || (c.bad && !$("force").checked);
   $("pick").disabled = busy || !("serial" in navigator); $("stock").disabled = busy || !PATCH;
+  $("whatrow").hidden = !pat.stock; $("whatmod").disabled = $("whatstock").disabled = busy;
+  $("flash").textContent = c.stock ? "Flash stock V1.01.14.002" : "Flash";
 }
 
 if (PATCH) {
   const n = PATCH.edits.reduce((s, e) => s + e[1].length / 2, 0);
   $("modinfo").innerHTML = "<b></b> <span class=muted></span>";
   $("modinfo").firstChild.textContent = PATCH.name;
+  $("whatmodname").textContent = "Tempest " + PATCH.name;
   $("modinfo").lastChild.textContent = "(built into this page: " + (n / 1024).toFixed(1) + " KB of mod data, no Retevis code)";
 } else {
   $("modinfo").className = "w"; $("modinfo").textContent = "No mod patch is built into this page.";
@@ -348,12 +357,12 @@ if (PATCH) {
 
 $("stock").addEventListener("change", async e => {
   const f = e.target.files[0]; if (!f || !PATCH) return;
-  pat = { fw: null, name: "" }; refresh();
+  pat = { fw: null, name: "", stock: null }; refresh();
   const el = $("stockinfo");
   try {
     const stock = new Uint8Array(await f.arrayBuffer());
     const out = await applyPatch(stock, PATCH);
-    pat = { fw: out, name: "HA1G_V1.01.14.002_" + PATCH.name + ".bin" };
+    pat = { fw: out, name: "HA1G_V1.01.14.002_" + PATCH.name + ".bin", stock };
     el.className = "info o";
     el.textContent = "\u2714 Stock V1.01.14.002 confirmed (" + f.name + ", sha256 " + PATCH.stock_sha256.slice(0, 8) + "…" + PATCH.stock_sha256.slice(-8) + ")\n" +
                      "\u2714 Patched: " + out.length.toLocaleString("en-US") + " bytes, sha256 " + PATCH.out_sha256.slice(0, 8) + "… matches " + PATCH.name;
@@ -364,6 +373,9 @@ $("stock").addEventListener("change", async e => {
   }
   refresh();
 });
+
+$("whatmod").addEventListener("change", refresh);
+$("whatstock").addEventListener("change", refresh);
 
 $("pick").addEventListener("click", async () => {
   try {
@@ -376,8 +388,10 @@ $("pick").addEventListener("click", async () => {
 });
 
 $("flash").addEventListener("click", async () => {
-  const { fw, name: fwName } = cur();
-  if (!confirm("Flash " + fwName + " to the radio?\nThe radio must be in update mode (PTT+SK1 at power on).")) return;
+  const { fw, name: fwName, stock: toStock } = cur();
+  const q = toStock ? "Flash the stock Retevis firmware V1.01.14.002 (" + fwName + ") to the radio?\nThis removes the mod and returns the radio to stock."
+                    : "Flash " + fwName + " to the radio?";
+  if (!confirm(q + "\nThe radio must be in update mode (PTT+SK1 at power on).")) return;
   busy = true; refresh(); $("prog").value = 0; $("status").textContent = "flashing..."; $("status").className = "muted";
   say("---- flashing " + fwName + " ----");
   try {
