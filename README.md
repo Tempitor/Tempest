@@ -7,14 +7,14 @@
 <p align="center"><b>Firmware modifications for popular handheld radios.</b><br>
 S-meter, band scope, waterfall, a third VFO, themes and more, flashed straight from your browser.</p>
 
-<p align="center"><a href="https://tempitor.github.io/Tempest/ha1g/"><b>Open the HA1G flasher</b></a> · <a href="ha1g/README.md">HA1G guide</a></p>
+<p align="center"><a href="https://tempitor.github.io/Tempest/ha1g/"><b>Open the HA1G flasher</b></a> · <a href="https://github.com/Tempitor/Tempest/blob/main/ha1g/README.md">HA1G guide</a></p>
 
 Each mod is applied in your browser to the radio's **stock firmware file, which you download
 from the manufacturer**. This repository contains no manufacturer firmware.
 
 | Radio | Current release | Flasher | Guide |
 |---|---|---|---|
-| Retevis / Ailunce HA1G | HA1G v1.0.0 (build D020) | [Open the flasher](https://tempitor.github.io/Tempest/ha1g/) | [ha1g/README.md](ha1g/README.md) |
+| Retevis / Ailunce HA1G | HA1G v1.0.0 (build D020) | [Open the flasher](https://tempitor.github.io/Tempest/ha1g/) | [HA1G guide](https://github.com/Tempitor/Tempest/blob/main/ha1g/README.md) |
 
 You need Chrome or Edge on a computer (Web Serial) and the radio's programming cable.
 
@@ -53,7 +53,7 @@ including the stock menus. Choose it in Radio Setting → Theme.
 
 **Fixes.** Monitor opens the squelch on every channel, and Talk Around / Freq Reversal now show
 the right frequency. Your channels and settings are kept, and CHIRP and the Retevis CPS still
-recognize the radio. The [HA1G guide](ha1g/README.md) has the full list, keys and flashing steps.
+recognize the radio. The [HA1G guide](https://github.com/Tempitor/Tempest/blob/main/ha1g/README.md) has the full list, keys and flashing steps.
 
 <sub>Screens are renderings of the 160×128 display using the radio's own fonts and the firmware's
 theme colors, with test data. They are not photos of a live radio.</sub>
