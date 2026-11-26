@@ -180,7 +180,7 @@ async function applyPatch(stock, p) {
 
 // ------------------------------------------------------------------ serial wrapper
 class Link {
-  constructor(port) { this.port = port; this.buf = []; this.reader = null; this.loop = null; this.writer = null; this.waiter = null; }
+  constructor(port) { this.port = port; this.buf = []; this.text = ""; this.reader = null; this.loop = null; this.writer = null; this.waiter = null; }
   wake() { const w = this.waiter; this.waiter = null; if (w) w(); }
   // resolves when new bytes arrive or after ms (event driven, so a background tab does not slow the flash)
   arrival(ms) { return new Promise(r => { const t = setTimeout(() => { if (this.waiter === done) this.waiter = null; r(); }, Math.max(0, ms)); const done = () => { clearTimeout(t); r(); }; this.waiter = done; }); }
@@ -190,7 +190,7 @@ class Link {
     this.writer = this.port.writable.getWriter();
     this.reader = this.port.readable.getReader();
     this.loop = (async () => {
-      try { for (;;) { const { value, done } = await this.reader.read(); if (done) break; if (value) { for (const b of value) this.buf.push(b); this.wake(); } } }
+      try { for (;;) { const { value, done } = await this.reader.read(); if (done) break; if (value) { for (const b of value) { this.buf.push(b); this.text += String.fromCharCode(b); } if (this.text.length > 4096) this.text = this.text.slice(-2048); this.wake(); } } }
       catch (e) { /* port closed or device gone */ }
     })();
   }
@@ -236,6 +236,14 @@ async function waitReadyC(link, ms) {
   showRadio(junk); return false;
 }
 
+// Which menu option the bootloader says it is waiting for ("Waiting for the file to be sent ('1')"),
+// from text received since the last call; null if it did not say. Line noise when the port opens
+// can reach the radio as a key press (seen: '3'), and then the radio rejects the firmware header.
+function echoedOption(link) {
+  const m = [...link.text.matchAll(/Waiting for the file to be sent[^(]*\('(.)'\)/g)]; link.text = "";
+  return m.length ? m[m.length - 1][1] : null;
+}
+
 // first ACK / NAK / CAN within ms (a stray 'C' or text is not an answer)
 async function waitAnswer(link, ms) {
   const end = performance.now() + ms;
@@ -275,12 +283,21 @@ async function flash(port, fw, name, onProgress) {
     if (ready) say("radio is already asking for the file, skipping the menu");
     else await quiet(link, 400, 4000);             // let any menu text finish printing
 
-    for (let t = 1; t <= 3 && !ready; t++) {
+    for (let t = 1, aborts = 0; t <= 3 && aborts <= 2; ) {
+      if (ready) {
+        const opt = echoedOption(link);
+        if (opt === null || opt === "1") break;
+        aborts++;
+        say("radio was in the wrong mode ('" + opt + "'), aborting and selecting Update Firmware", "w");
+        await link.write(new Uint8Array([0x61]));  // 'a' = abort, back to the menu
+        ready = false; await quiet(link, 400, 4000); continue;
+      }
       say("selecting 1 (Update Firmware)" + (t > 1 ? ", try " + t : "") + " ...");
-      await link.write(new Uint8Array([0x31]));
+      await link.write(new Uint8Array([0x31])); t++;
       ready = await waitReadyC(link, 8000);
       if (!ready) await quiet(link, 400, 3000);
     }
+    if (ready && !["1", null].includes(echoedOption(link))) ready = false;
     if (!ready) throw new Error("the radio never asked for the file (no 'C'). Is it in update mode (PTT+SK1 at power on)?");
 
     let h = null;
