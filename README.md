@@ -12,9 +12,9 @@ S-meter, band scope, waterfall, a third VFO, themes and more, flashed straight f
 Each mod is applied in your browser to the radio's **stock firmware file, which you download
 from the manufacturer**. This repository contains no manufacturer firmware.
 
-| Radio | Current release | Flasher | Guide |
-|---|---|---|---|
-| Retevis / Ailunce HA1G | HA1G v1.0.0 (build D020) | [Open the flasher](https://tempitor.github.io/Tempest/ha1g/) | [HA1G guide](https://github.com/Tempitor/Tempest/blob/main/ha1g/README.md) |
+| Radio | Current release | Flasher | Guide | Video |
+|---|---|---|---|---|
+| Retevis / Ailunce HA1G | HA1G v1.0.0 (build D020) | [Open the flasher](https://tempitor.github.io/Tempest/ha1g/) | [HA1G guide](https://github.com/Tempitor/Tempest/blob/main/ha1g/README.md) | [Watch on YouTube](https://youtu.be/S8D3sTKIlws) |
 
 You need Chrome or Edge on a computer (Web Serial) and the radio's programming cable.
 
