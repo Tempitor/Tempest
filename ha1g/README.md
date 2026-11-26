@@ -4,6 +4,8 @@ Custom firmware for the Retevis / Ailunce **HA1G**, flashed straight from your b
 
 **Open the flasher: https://tempitor.github.io/Tempest/ha1g/**
 
+**Video: [HA1G Tempest firmware walkthrough](https://youtu.be/S8D3sTKIlws)** (waterfall, band scope, multi-VFO)
+
 This repository contains no proprietary firmware, you supply the firmware for your radio. The page
 checks that it is the exact stock file, adds the mod to it on your computer, checks the result,
 and flashes it to your radio. Nothing is uploaded anywhere.
