@@ -25,7 +25,7 @@ ap=argparse.ArgumentParser()
 ap.add_argument('src'); ap.add_argument('dst')
 ap.add_argument('--cave',default=os.path.join(os.path.dirname(os.path.abspath(__file__)),'scope_cave.bin'))
 for n,dv in (('step',6250),('half',18),('dwell-us',2500),('hop-ticks',1),('pts-per-hop',3),
-             ('redraw-ticks',5),('cal-db',0),('floor',-130),('top',-70),('quiet-ticks',3),('watch-view',1),('recentre-ticks',25),('dw-pts',3),('dw-quiet',1),('toggle-key',1),('scope-on',2),('even-hops',1),('meter-gap',2),('meter-every',2),('lock-margin',15)):
+             ('redraw-ticks',5),('cal-db',0),('floor',-130),('top',-70),('quiet-ticks',3),('watch-view',1),('recentre-ticks',25),('dw-pts',3),('dw-quiet',1),('toggle-key',1),('scope-on',2),('even-hops',1),('meter-gap',2),('meter-every',2),('lock-margin',10)):
     ap.add_argument('--'+n,type=int,default=dv)
 a=ap.parse_args()
 MON_TAFR='09a75c39fc04dac7dcc8e8a96d72aa99bf0bce37f7b4d5378db30d3eaf242943'

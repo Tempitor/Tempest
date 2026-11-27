@@ -439,7 +439,15 @@ print('   rows added in 40 ticks:',rows)
 check('each finished sweep adds one history row',rows>=2)
 row=rd(WF+h1*NM,NM)
 print('   newest row (levels):',list(row[:37]))
-check('row levels: -80 dBm at +4 bars = 6, -100 dBm at -10 bars = 3, noise -125 = 0',row[18+4]==6 and row[18-10]==3 and row[0]==0 and row[30]==0)
+check('D022 row levels relative to the sweep average (-123 dBm): -80 at +4 bars = 7 (max), -100 at -10 bars = 23 dB up = 7, noise = 0',row[18+4]==7 and row[18-10]==7 and row[0]==0 and row[30]==0)
+sv_sig=dict(signal); signal.clear(); signal[HOME+4*6250]=-118
+for f0 in range(-18,19):
+    if f0!=4: signal[HOME+f0*6250]=-130
+hw=rd(S+212,1)[0]; [tick(i%2==0) for i in range(40)]
+roww=rd(WF+rd(S+212,1)[0]*NM,NM)
+print('   weak-signal row (noise -130, signal -118):',list(roww[:37]))
+check('D022: weak audible signal 12 dB over a -130 dBm floor is drawn cyan (level 3), was background before',roww[18+4]==3 and roww[0]==0)
+signal.clear(); signal.update(sv_sig)
 check('waterfall window is invalidated for the new row',any(g[0]=='inval' and g[1][0]==HWF for g in gui) or True)
 gui.clear(); [tick() for _ in range(5)]
 check('tick invalidates the waterfall window after a new row',any(g[0]=='inval' and g[1][0]==HWF for g in gui))
@@ -464,7 +472,7 @@ call(SYM['hf_hook'],HOME+6250)
 for i in range(70): tick(i%2==0)
 cen=st()['cen']; h2=rd(S+212,1)[0]
 old=rd(WF+h1*NM,NM)
-check('Up by one bar step: centre moves to the new frequency and old rows slide one bar (the -80 signal now at +3)',cen==HOME+6250 and old[18+3]==6 and old[18-11]==3)
+check('Up by one bar step: centre moves to the new frequency and old rows slide one bar (the -80 signal now at +3)',cen==HOME+6250 and old[18+3]==7 and old[18-11]==7)
 call(SYM['hf_hook'],HOME+3000)
 for i in range(70): tick(i%2==0)
 old2=rd(WF+h1*NM,NM)

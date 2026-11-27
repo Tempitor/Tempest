@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw
 from mock import text
 from font import width
 F8, F10, F16, F20 = 0x68918, 0x6a570, 0x6ba98, 0x6dab0
-VER = 'V1.01.14.002 D020'
+VER = 'V1.01.14.002 D022'
 
 BLACK = (0, 0, 0); NAVY = (0, 12, 48); DEEP = (4, 24, 96); ROYAL = (36, 72, 220)
 TEAL = (0, 184, 168); AQUA = (96, 240, 220); WHITE = (255, 255, 255); GREY = (120, 140, 160)
