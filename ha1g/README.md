@@ -109,6 +109,11 @@ and the VFO cards grow to fill the screen while the scope is off. A Tempest logo
 - **CHIRP and the Band Scope key:** CHIRP doesn't know this key function and may reset that key to OFF when you upload settings. Set the key again on the radio afterwards.
 - With Power Save on, scope bars can read low or jumpy.
 
+## Source code
+
+The full source of this release, with a script that rebuilds it from your stock file, is in
+[ha1g/src](https://github.com/Tempitor/Tempest/tree/main/ha1g/src).
+
 ## Use at your own risk
 
 This is an unofficial modification, not supported by Retevis or Ailunce, and it may void your

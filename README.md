@@ -68,6 +68,9 @@ Tempest is free software, licensed under the **GNU General Public License v3.0 o
 ([LICENSE](LICENSE)). You can use, study, share and change it, and if you share a changed
 version you must share its source under the same license.
 
+**Source code:** the HA1G source, with a script that rebuilds the release from your stock file, is
+in [ha1g/src](https://github.com/Tempitor/Tempest/tree/main/ha1g/src).
+
 **Other licensing:** the author also offers Tempest under separate terms, for example to radio
 manufacturers who want to build it into their products. To ask, open an issue or contact
 [@Tempitor](https://github.com/Tempitor).
