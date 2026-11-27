@@ -25,7 +25,7 @@ cd ha1g/src
 ```
 
 The script checks the stock file, builds each stage, and stops unless the result has the released
-sha256 `135a03d91d21f9bc41a62d5a84c44ab3ece425d1955903ff034641d26edf3481`. With `--test` it also runs
+sha256 `2048b495e06c8f9a04ce98e52b5e407d37febed36e0b67075a2c317cb67eb123`. With `--test` it also runs
 the checks in `verify_*.py`, which execute the patched code in the Unicorn CPU emulator (about a minute).
 
 The built `.bin` contains Retevis firmware, so keep it to yourself; share the source or a patch instead.
