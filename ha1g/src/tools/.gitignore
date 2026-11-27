@@ -1,0 +1,5 @@
+# build outputs
+scope_cave.bin
+scope_cave.sym
+logo_data.h
+__pycache__/
