@@ -81,3 +81,8 @@ keeps this dual licensing possible.
 
 This repository contains no manufacturer firmware. Tempest is not affiliated with or endorsed by
 Retevis, Ailunce or any radio maker. See [NOTICE](NOTICE).
+
+## Support Tempest
+
+Tempest is free and will stay free. If you find it useful and want to help, you can support
+development on [Patreon](https://www.patreon.com/17195448/join). It is completely optional.
