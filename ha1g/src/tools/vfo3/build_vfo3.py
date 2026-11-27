@@ -125,7 +125,7 @@ patch(0x1889f, b'5', b'4')                                     # 0x18898 "%03d.%
 patch(0x1ab32, bytes.fromhex('0a21'), bytes.fromhex('6421'))   # movs r1,#0xa -> #0x64 (0x1abec formatter)
 patch(0x1abf3, b'5', b'4')                                     # 0x1abec "%03d.%05d" -> "%03d.%04d"
 # version suffix QRP13 -> revision scheme Dnnn (D001 = 2026-11-24 baseline, was Q3V12)
-REV = 'D020'
+REV = 'D022'
 i = d.find(b'V%d.%d.%d.%03dQRP13\0'); assert i > 0 and len(REV) <= 5
 d[i:i+20] = (b'V%d.%d.%d.%03d' + REV.encode()).ljust(20, b'\0')
 END = B + len(d)

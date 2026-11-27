@@ -10,7 +10,7 @@ This repository contains no proprietary firmware, you supply the firmware for yo
 checks that it is the exact stock file, adds the mod to it on your computer, checks the result,
 and flashes it to your radio. Nothing is uploaded anywhere.
 
-Current release: **Tempest HA1G v1.0.0** (build D020). After flashing, Menu → Radio Information shows `V1.1.14.002D020`.
+Current release: **Tempest HA1G v1.0.1** (build D022). After flashing, Menu → Radio Information shows `V1.1.14.002D022`.
 Your channels and settings are kept, and CHIRP and the Retevis CPS still recognize the radio.
 
 ## What you need
@@ -28,7 +28,7 @@ Your channels and settings are kept, and CHIRP and the Retevis CPS still recogni
 1. Back up your codeplug with CHIRP or the Retevis CPS.
 2. Open the flasher link above.
 3. Choose the stock `.bin` (V1.01.14.002 from the [Ailunce HA1G software page](https://www.ailunce.com/supports-ha1g-software)). You should see two green ticks:
-   stock file confirmed, and patched file matches D020.
+   stock file confirmed, and patched file matches D022.
 4. Click **Select COM port** and choose the cable.
 5. Turn the radio off. Hold **PTT + SK1** while turning it on (update mode).
 6. Click **Flash** and wait for "done" (about a minute).

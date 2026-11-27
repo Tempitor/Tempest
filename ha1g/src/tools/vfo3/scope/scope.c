@@ -92,7 +92,7 @@ typedef struct {
   u32 pg_ov;                          /* D012: Band Scope / Side Key PTT list overlay window (repainted on selection change) */
 } st_t;
 #define S ((st_t*)0x2001B000)
-#define SMAGIC 0x5343000Fu   /* D005: changed per build so a flash without a power cycle starts clean */
+#define SMAGIC 0x53430016u   /* D005: changed per build so a flash without a power cycle starts clean */
 
 static void st_init(void){
   if (S->magic == SMAGIC) return;
@@ -190,11 +190,15 @@ __attribute__((minsize,noinline)) static void wf_push(void){
   if (!S->wf) return;
   if (++S->wfhead>=WF_ROWS) S->wfhead=0;
   u8 *row=WF+S->wfhead*NMAX;
-  for (int i=0;i<NMAX;i++){ s32 d=S->dbm[i]; s32 q= d<-116? 0 : (d+116)/7+1; row[i]=(u8)(q>7?7:q); }
+  int n=2*npts()+1, b=n/2; s32 sum=0; int cnt=0;
+  for (int i=0;i<n;i++){ s32 d=S->dbm[i]; if (d>S->dbm[b]) b=i; if (d>-190){ sum+=d; cnt++; } }
+  /* D022: colour relative to this sweep's average (the same reference as the marker lock): level 1 from
+     4 dB above it, one level per 3 dB, 7 from 22 dB up (a 12 dB signal = cyan, a locked 15 dB peak = level 4).  Was absolute (-116 dBm and up), so a weak but
+     audible signal that locked the marker could still be drawn as background. */
+  s32 av = cnt? sum/cnt : -200;
+  for (int i=0;i<NMAX;i++){ s32 d=S->dbm[i]-av; s32 q= (i>=n || d<4)? 0 : (d-1)/3; row[i]=(u8)(q>7?7:q); }
   S->wfnew=1;
   if (!S->mkhold){
-    int n=2*npts()+1, b=n/2; s32 sum=0; int cnt=0;
-    for (int i=0;i<n;i++){ s32 d=S->dbm[i]; if (d>S->dbm[b]) b=i; if (d>-190){ sum+=d; cnt++; } }
     S->mk=(u8)b;   /* D010: marker on the strongest bar */
     /* D015: lock only on a peak that stands lock_margin dB above the sweep's average (a real signal, not a
        momentary spike or the noise floor) AND that was already the standout on the previous sweep, so a
