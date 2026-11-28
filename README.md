@@ -15,7 +15,7 @@ from the manufacturer**. This repository contains no manufacturer firmware.
 | Radio | Current release | Flasher | Guide | Video |
 |---|---|---|---|---|
 | Retevis / Ailunce HA1G | HA1G v1.0.1 (build D022) | [Open the flasher](https://tempitor.github.io/Tempest/ha1g/) | [HA1G guide](https://github.com/Tempitor/Tempest/blob/main/ha1g/README.md) | [Watch on YouTube](https://youtu.be/S8D3sTKIlws) |
-| Retevis / Ailunce HA1UV | Coming soon (Dec. 2026) | | | |
+| Retevis / Ailunce HA1UV | Coming soon (Dec. 2026). [Early access for patrons](https://www.patreon.com/Tempest5978/posts/tempest-for-176574356) | | | |
 | Retevis / Ailunce HA2 | Coming soon (Dec. 2026) | | | |
 
 You need Chrome or Edge on a computer (Web Serial) and the radio's programming cable.
