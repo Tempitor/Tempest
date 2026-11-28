@@ -44,6 +44,7 @@
   .tabs { display:flex; gap:4px; border-bottom:1px solid var(--line); margin-bottom:10px; }
   .tabs button { border-radius:6px 6px 0 0; border-bottom:none; background:var(--bg); margin-bottom:-1px; }
   .tabs button.on { background:var(--panel); border-bottom:1px solid var(--panel); font-weight:600; }
+  a { color:var(--accent); }
   .hint { background:color-mix(in srgb, var(--accent) 12%, transparent); padding:6px 8px; border-radius:6px; margin-bottom:8px; }
 </style>
 </head>
@@ -80,6 +81,15 @@
     <div class="row" style="justify-content:space-between;margin-bottom:6px"><b>Log</b>
       <span><button id="clear">Clear</button> <button id="save">Save log</button></span></div>
     <pre id="log"></pre>
+  </div>
+
+  <div class="card">
+    <b>Need the stock firmware?</b>
+    <ol style="margin:6px 0 0;padding-left:20px">
+      <li>Open the <a href="https://www.ailunce.com/supports-ha1g-software" target="_blank" rel="noopener">Ailunce HA1G software page</a> and download the HA1G firmware, version <b>V1.01.14.002</b>.</li>
+      <li>Unzip it. You need the file <code>HA1G_V1.01.14.002_20260422.bin</code>.</li>
+      <li>Choose it above as the <b>Stock file</b>. Any other version is refused.</li>
+    </ol>
   </div>
 </main>
 <!-- Mod patch: only the bytes our build changed or added vs stock, no Retevis code.
