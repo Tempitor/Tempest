@@ -58,6 +58,7 @@
       <div class="row"><label class="k">Mod</label><span id="modinfo"></span></div>
       <div class="row" style="margin-top:6px"><label class="k">Stock file</label><input type="file" id="stock" accept=".bin"></div>
       <div id="stockinfo" class="info muted">Choose the stock Retevis/Ailunce HA1G V1.01.14.002 file (HA1G_V1.01.14.002_20260422.bin). Any other file or version is refused.</div>
+      <div class="muted" style="font-size:13px;margin-top:4px">Get it from Ailunce: <a href="https://www.ailunce.com/Assets/file/HA1G_V1.01.14.002_20260422.zip" target="_blank" rel="noopener"><code>HA1G_V1.01.14.002_20260422.zip</code></a> (or the <a href="https://www.ailunce.com/supports-ha1g-software" target="_blank" rel="noopener">HA1G software page</a>). Unzip it first.</div>
       <div id="whatrow" class="row" style="margin-top:10px;align-items:flex-start" hidden><label class="k">Flash</label>
         <div><label><input type="radio" name="what" id="whatmod" checked> <b id="whatmodname">Tempest</b> <span class="muted">(stock + mod patch)</span></label><br>
           <label><input type="radio" name="what" id="whatstock"> <b>Stock V1.01.14.002</b> <span class="muted">(your file as is, return to stock)</span></label></div></div>
@@ -84,11 +85,14 @@
   </div>
 
   <div class="card">
-    <b>Need the stock firmware?</b>
+    <b>How to flash</b>
     <ol style="margin:6px 0 0;padding-left:20px">
-      <li>Download <a href="https://www.ailunce.com/Assets/file/HA1G_V1.01.14.002_20260422.zip" target="_blank" rel="noopener"><code>HA1G_V1.01.14.002_20260422.zip</code></a> from Ailunce (or from the <a href="https://www.ailunce.com/supports-ha1g-software" target="_blank" rel="noopener">HA1G software page</a>).</li>
-      <li>Unzip it. You need the file <code>HA1G_V1.01.14.002_20260422.bin</code>.</li>
-      <li>Choose it above as the <b>Stock file</b>. Any other version is refused.</li>
+      <li>Back up your codeplug with CHIRP or the Retevis CPS.</li>
+      <li>Download the stock firmware (link under <b>Stock file</b>), unzip it, and choose <code>HA1G_V1.01.14.002_20260422.bin</code>. Wait for the two green ticks.</li>
+      <li>Click <b>Select COM port</b> and choose the programming cable.</li>
+      <li>Turn the radio off. Hold <b>PTT + SK1</b> while turning it on (update mode).</li>
+      <li>Click <b>Flash</b> and wait for "done" (about a minute).</li>
+      <li>Check Menu &rarr; Radio Information for the new version.</li>
     </ol>
   </div>
 </main>
